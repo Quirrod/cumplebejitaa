@@ -1,0 +1,484 @@
+---
+const title = "Mis 21 - Fiesta de Cumple";
+const description = "Estás invitad@ a celebrar mis 21 años";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('/entrada.jpeg') center/cover no-repeat;
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .bee-emoji {
+      font-size: 4rem;
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFD700 0%, #FF6B00 50%, #FF3333 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 1rem 0;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: #FFD700;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .age {
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem;
+      font-weight: 900;
+      background: linear-gradient(180deg, #FFD700 0%, #FF6B00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      text-shadow: 0 0 60px rgba(255, 107, 0, 0.5);
+    }
+
+    .age-text {
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .invitation-text {
+      font-size: 1.1rem;
+      color: #eee;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+
+    .events {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin: 2rem 0;
+      width: 100%;
+    }
+
+    .event-card {
+      background: rgba(255, 215, 0, 0.08);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: left;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .event-card:hover {
+      background: rgba(255, 215, 0, 0.12);
+      border-color: rgba(255, 215, 0, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .event-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .event-icon {
+      font-size: 2rem;
+    }
+
+    .event-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #FFD700;
+      font-weight: 700;
+    }
+
+    .event-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .event-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: #ddd;
+    }
+
+    .event-detail-icon {
+      opacity: 0.8;
+      min-width: 20px;
+    }
+
+    .event-note {
+      margin-top: 0.8rem;
+      padding: 0.8rem;
+      background: rgba(255, 107, 0, 0.15);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #FFD700;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+      color: #666;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #FFD700, transparent);
+      opacity: 0.3;
+    }
+
+    .confirm-section {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .confirm-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #FFD700;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #FFD700;
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      padding: 0.8rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      transition: all 0.3s ease;
+    }
+
+    .checkbox-label:hover {
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    .checkbox-label input {
+      width: 20px;
+      height: 20px;
+      accent-color: #FFD700;
+    }
+
+    .checkbox-text {
+      flex: 1;
+    }
+
+    .checkbox-title {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .checkbox-desc {
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    .btn-confirm {
+      width: 100%;
+      padding: 1rem 2rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #FFD700 0%, #FF6B00 100%);
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-confirm:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 107, 0, 0.4);
+    }
+
+    .btn-confirm:active {
+      transform: translateY(-1px);
+    }
+
+    .footer-message {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #FFD700;
+      opacity: 0.8;
+    }
+
+    .hearts {
+      display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 1.5rem;
+      }
+
+      .event-card {
+        padding: 1.2rem;
+      }
+
+      .confirm-section {
+        padding: 1.5rem;
+      }
+
+      .age {
+        font-size: 6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="content">
+      <span class="bee-emoji">🐝</span>
+
+      <p class="subtitle">Llegaron mis</p>
+      <div class="age">21</div>
+      <p class="age-text">(la edad legal completa de una abeja)</p>
+
+      <p class="invitation-text">
+        Personita hermosa, me encantaria que estes ahi para compartir ese super momento conmigo,
+        porque te quiero mucho y porque me alegras cuando la vida duele.
+      </p>
+
+      <div class="events">
+        <div class="event-card">
+          <div class="event-header">
+            <span class="event-icon">🎉</span>
+            <span class="event-title">Almuerzo de Celebracion</span>
+          </div>
+          <div class="event-details">
+            <div class="event-detail">
+              <span class="event-detail-icon">📅</span>
+              <span>Sabado 28 de febrero</span>
+            </div>
+            <div class="event-detail">
+              <span class="event-detail-icon">🕐</span>
+              <span>13:30 a 19:00</span>
+            </div>
+            <div class="event-detail">
+              <span class="event-detail-icon">📍</span>
+              <span>Club Social y Deportivo "LITORAL"<br>
+                <small style="color: #999;">Zona Bajo Seguencoma, Final Av. Victor Zapana s/n (detras de ANAPOL)</small>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider">
+          <span>🐝</span>
+        </div>
+
+        <div class="event-card">
+          <div class="event-header">
+            <span class="event-icon">🪩</span>
+            <span class="event-title">After Party - Bailando Zumbando</span>
+          </div>
+          <div class="event-details">
+            <div class="event-detail">
+              <span class="event-detail-icon">📅</span>
+              <span>Sabado 28 de febrero (noche)</span>
+            </div>
+            <div class="event-detail">
+              <span class="event-detail-icon">🕘</span>
+              <span>Desde las 21:00 hasta que puedas!</span>
+            </div>
+            <div class="event-detail">
+              <span class="event-detail-icon">📍</span>
+              <span>Discoteca GREEN<br>
+                <small style="color: #999;">Av. Munoz Reyes #777, Cota Cota</small>
+              </span>
+            </div>
+          </div>
+          <div class="event-note">
+            💰 Ingreso: Bs. 40 • Tendremos mesita con consumo 🍹
+          </div>
+        </div>
+      </div>
+
+      <div class="confirm-section">
+        <h2 class="confirm-title">🐝 Confirma tu asistencia</h2>
+
+        <form id="confirmForm" action="https://formsubmit.co/joeljarro2@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nueva confirmacion - Cumple 21!">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="form-group">
+            <label class="form-label">Tu nombre</label>
+            <input type="text" name="nombre" class="form-input" placeholder="Como te llamas?" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Asistire a:</label>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="almuerzo" value="Si">
+                <div class="checkbox-text">
+                  <div class="checkbox-title">🎉 Almuerzo (13:30 - 19:00)</div>
+                  <div class="checkbox-desc">Club LITORAL - Bajo Seguencoma</div>
+                </div>
+              </label>
+
+              <label class="checkbox-label">
+                <input type="checkbox" name="fiesta_nocturna" value="Si">
+                <div class="checkbox-text">
+                  <div class="checkbox-title">🪩 After Party (21:00+)</div>
+                  <div class="checkbox-desc">Discoteca GREEN - Cota Cota</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Mensaje (opcional)</label>
+            <input type="text" name="mensaje" class="form-input" placeholder="Algun mensaje para la cumpleanera?">
+          </div>
+
+          <button type="submit" class="btn-confirm">
+            🐝 Confirmar Asistencia
+          </button>
+        </form>
+      </div>
+
+      <p class="footer-message">
+        Mi corazon de abeja estara muy feliz de verte ahi<br>
+        <span class="hearts">🐝💛✨</span>
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Animacion de confeti al enviar
+    document.getElementById('confirmForm').addEventListener('submit', function(e) {
+      const btn = document.querySelector('.btn-confirm');
+      btn.textContent = '✨ Enviando...';
+      btn.style.background = 'linear-gradient(135deg, #00ff00 0%, #00cc00 100%)';
+    });
+  </script>
+</body>
+</html>
